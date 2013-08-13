@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Serial number:</strong>
+  <%= @medical_record.serial_number %>
+</p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @medical_record.patient %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @medical_record.creator %>
+</p>
+
+<p>
+  <strong>Reviewer:</strong>
+  <%= @medical_record.reviewer %>
+</p>
+
+<p>
+<%= link_to 'Download', medical_record_path(@medical_record.id) +'.pdf' %>
+<a href="https://docs.google.com/gview?url=<%= medical_record_path(@medical_record.id)+'.pdf' %>&embedded=true">View Online</a>
+</p>
+
+<%= link_to 'Edit', edit_medical_record_path(@medical_record) %> |
+<%= link_to 'Back', medical_records_path %>

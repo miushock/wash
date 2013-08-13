@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808182028) do
+ActiveRecord::Schema.define(version: 20130808220839) do
+
+  create_table "medical_records", force: true do |t|
+    t.string   "serial_number"
+    t.string   "patient"
+    t.string   "creator"
+    t.string   "reviewer"
+    t.binary   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

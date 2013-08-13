@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  serial_number: MyString
+  patient: MyString
+  creator: MyString
+  reviewer: MyString
+  content: 
+
+two:
+  serial_number: MyString
+  patient: MyString
+  creator: MyString
+  reviewer: MyString
+  content: 

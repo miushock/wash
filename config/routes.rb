@@ -1,4 +1,6 @@
 Wash::Application.routes.draw do
+  resources :medical_records
+
   devise_for :users
   #Devise requirement, must have defined root_url to something
   root :to => "home#index"
