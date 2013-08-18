@@ -1,0 +1,23 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>email</th>
+      <th>Patient</th>
+      <th>Doctor</th>
+      <th>Technician</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.role?(:patient) %></td>
+        <td><%= user.role?(:doctor) %></td>
+        <td><%= user.role?(:technician) %></td>
+        <td><%= button_to 'Grant Doctor Access', :controller=>"admin_tools", :action => "grant_role", :email => user.email, :role => "Doctor" %></td>
+        <td><%= button_to 'Grant Technician Access', :controller=>"admin_tools", :action => "grant_role", :email => user.email, :role => "Technician" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

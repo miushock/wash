@@ -1,6 +1,10 @@
 class MedicalRecordsController < ApplicationController
   before_action :set_medical_record, only: [:show, :edit, :update, :destroy]
 
+  #CanCan authorization before filter
+  before_action :load_medical_record, only: :create
+  load_and_authorize_resource
+
   # GET /medical_records
   # GET /medical_records.json
   def index
@@ -33,11 +37,7 @@ class MedicalRecordsController < ApplicationController
   # POST /medical_records
   # POST /medical_records.json
   def create
-    uploaded_io = params[:medical_record][:content]
-    file_content = uploaded_io.read
-    params[:medical_record][:content] = file_content
-
-    @medical_record = MedicalRecord.new(medical_record_params)
+    #@medical_record = MedicalRecord.new(medical_record_params)
 
     respond_to do |format|
       if @medical_record.save
@@ -47,6 +47,18 @@ class MedicalRecordsController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @medical_record.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # PATCH/PUT /medical_records/1/upload_content
+  def upload_content
+    uploaded_io = params[:content]
+    file_content = uploaded_io.read
+    @medical_record.content = file_content
+    if @medical_record.save
+      redirect_to @medical_record, notice: 'pdf uploaded successfully'
+    else
+      render action: 'edit'
     end
   end
 
@@ -75,13 +87,17 @@ class MedicalRecordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_medical_record
-      @medical_record = MedicalRecord.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_medical_record
+    @medical_record = MedicalRecord.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def medical_record_params
-      params.require(:medical_record).permit(:serial_number, :patient, :creator, :reviewer, :content)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def medical_record_params
+    params.require(:medical_record).permit(:serial_number, :patient, :creator, :reviewer, :content)
+  end
+
+  def load_medical_record
+    @medical_record = MedicalRecord.new(medical_record_params)
+  end
 end

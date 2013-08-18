@@ -2,5 +2,12 @@
 
 <%= render 'form' %>
 
+<h1>Upload record file</h1>
+
+<%= form_tag("/medical_records/#{@medical_record.id}/upload_content", method:"patch", multipart: true) do %>
+  <%= file_field_tag 'content' %>
+  <%= submit_tag 'upload' %>
+<% end %>
+
 <%= link_to 'Show', @medical_record %> |
 <%= link_to 'Back', medical_records_path %>

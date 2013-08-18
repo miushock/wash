@@ -1,9 +1,15 @@
 Wash::Application.routes.draw do
+
+  patch 'medical_records/:id/upload_content', to: 'medical_records#upload_content'
+
   resources :medical_records
 
   devise_for :users
   #Devise requirement, must have defined root_url to something
-  root :to => "home#index"
+  root :to => "main_pages#place_holder"
+
+  get '/admin_tools/user_list', to: 'admin_tools#user_list'
+  post '/admin_tools/grant_role', to: 'admin_tools#grant_role'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,6 +11,14 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
+<ul class="hmenu">
+  <% if user_signed_in? %>
+    <p> hello <%= current_user.email %> </p>
+  <% end %>
+  <%= render 'devise/menu/registration_items' %>
+  <%= render 'devise/menu/login_items' %>
+</ul>
+
 <%= yield %>
 
 </body>
